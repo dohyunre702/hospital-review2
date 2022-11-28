@@ -1,11 +1,12 @@
-package com.example.hospital.review.dto;
+package com.example.hospital.review.domain.dto;
 
 import lombok.*;
 
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserJoinResponse {
+public class UserJoinRequest {
     private String userName;
+    private String password;
     private String emailAddress;
 }

@@ -1,4 +1,4 @@
-package com.example.hospital.review.dto;
+package com.example.hospital.review.domain.dto;
 
 import lombok.*;
 
