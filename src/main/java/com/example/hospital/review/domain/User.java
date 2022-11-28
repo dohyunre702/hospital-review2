@@ -3,8 +3,11 @@ package com.example.hospital.review.domain;
 import lombok.*;
 import javax.persistence.*;
 
+@Builder
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
+@Entity
 public class User {
 
     @Id
