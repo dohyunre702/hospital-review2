@@ -4,7 +4,7 @@ import com.example.hospital.review.domain.Response;
 import com.example.hospital.review.domain.dto.UserDto;
 import com.example.hospital.review.domain.dto.UserJoinRequest;
 import com.example.hospital.review.domain.dto.UserJoinResponse;
-import com.example.hospital.review.domain.dto.UserService;
+import com.example.hospital.review.service.UserService;
 
 import lombok.*;
 import org.springframework.web.bind.annotation.*;
