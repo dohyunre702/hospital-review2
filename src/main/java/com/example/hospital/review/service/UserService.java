@@ -1,6 +1,8 @@
-package com.example.hospital.review.domain.dto;
+package com.example.hospital.review.service;
 
 import com.example.hospital.review.domain.User;
+import com.example.hospital.review.domain.dto.UserDto;
+import com.example.hospital.review.domain.dto.UserJoinRequest;
 import com.example.hospital.review.repository.UserRepository;
 import lombok.*;
 import org.springframework.stereotype.Service;
