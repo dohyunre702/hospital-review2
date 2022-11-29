@@ -75,6 +75,7 @@ public class UserControllerTest {
         when(userService.join(any())).thenThrow(new HospitalReviewAppException(ErrorCode.DUPLICATED_USER_NAME, ""));
 
         mockMvc.perform(post("/api/v1/users/join")
+                        .with(csrf())
                 .contentType(MediaType.APPLICATION_JSON)
 
                 .content(objectMapper.writeValueAsBytes(userJoinRequest)))
