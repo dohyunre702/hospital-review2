@@ -3,6 +3,7 @@ package com.example.hospital.review.domain.dto;
 import com.example.hospital.review.domain.User;
 import lombok.*;
 
+@Builder
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
