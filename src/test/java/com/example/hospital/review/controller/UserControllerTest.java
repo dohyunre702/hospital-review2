@@ -82,5 +82,23 @@ public class UserControllerTest {
                 .andDo(print())
                 .andExpect(status().isConflict());
         }
+
+    @Test
+    @DisplayName("로그인 실패 - id 없음")
+    void login_fail1() throws Exception {
+        //String id = "dd"
+        //String password = "1q2w3e4r"
+
+        //id, pw 보내기
+        when(userService.login(any(), any())).thenThrow(new HospitalReviewAppException(ErrorCode.NOT_FOUND, ""));
+
+        mockMvc.perform(post("/api/v1/users/login")
+                        .with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON)
+
+                        .content(objectMapper.writeValueAsBytes(userJoinRequest)))
+                .andDo(print())
+                .andExpect(status().isNotFound());
+    }
     }
 
