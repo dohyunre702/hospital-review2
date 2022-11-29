@@ -6,6 +6,8 @@ import com.example.hospital.review.domain.dto.UserJoinRequest;
 import com.example.hospital.review.exception.ErrorCode;
 import com.example.hospital.review.exception.HospitalReviewAppException;
 import com.example.hospital.review.repository.UserRepository;
+
+import com.example.hospital.review.utils.JwtTokenUtil;
 import lombok.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,11 @@ import org.springframework.stereotype.Service;
 public class UserService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder encoder;
+
+    @Value("${jwt.token.secret}")
+    private String secretKey;
+    private long expireTimeMs = 1000 * 60 * 60; //1시간
+
     public UserDto join(UserJoinRequest request) {
         // 비즈니스 로직 - 회원 가입
         // 회원 userName(id) 중복 check
@@ -45,7 +52,12 @@ public class UserService {
         userRepository.findByUserName(userName)
                 .orElseThrow(() -> new HospitalReviewAppException(ErrorCode.NOT_FOUND, String.format("%는 가입된 적이 없습니다.", userName)));
         //password 일치여부 확인
+        if(!encoder.matches(password, user.getPassword())) {
+            throw new HospitalReviewAppException(ErrorCode.INVALID_PASSWORD,
+                    String.format("userName 또는 password가 잘못 됐습니다."));
+        }
+
         //2가지 확인 중 예외 없으면 Token 발행
-        return "";
+        return JwtTokenUtil.createToken(userName, secretKey, expireTimeMs);
     }
 }
